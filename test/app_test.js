@@ -7,9 +7,11 @@ describe('The Express main app', () => {
     request(app)
       .get('/api')
       .end((err, response) => {
-        //
-        console.log(response);
+        // Assert that that GET route returns data
+        assert(typeof response.body === 'object');
+        assert(response.body.howdy === 'partner');
+        assert(response.status === 200);
+        done();
       });
-    done();
   });
 });
