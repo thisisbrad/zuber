@@ -15,4 +15,9 @@ app.use(json());
 // attaching routes
 routes(app);
 
+app.use((err, req, res, next) => {
+  // Error middleware
+  res.status(422).send({ error: err._message });
+});
+
 module.exports = app;
