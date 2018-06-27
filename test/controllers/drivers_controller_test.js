@@ -26,10 +26,22 @@ describe('Drivers controller', () => {
 
   it('PUT to /api/drivers edits an existing driver', done => {
     // create driver for test
-    const driver = new Drivers({ email: 'test@driver.com', driving: false });
+    const email = 'test@driver.com';
+    const driver = new Drivers({ email, driving: false });
     // edit driver
     driver.save().then(() => {
-      //
+      // hit database for driver
+      request(app)
+        .put(`/api/drivers/${driver._id}`)
+        .send({ driving: true })
+        .end(() => {
+          //
+          Driver.findOne({ email }).then(driver => {
+            //
+            asssert(driver.driving === true);
+            done();
+          });
+        });
     });
     // check for edit
     done();
