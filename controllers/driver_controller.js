@@ -4,5 +4,6 @@ module.exports = {
   },
   create(req, res) {
     //
+    console.log('body', res.body);
   }
 };
