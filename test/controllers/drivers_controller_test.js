@@ -36,32 +36,28 @@ describe('Drivers controller', () => {
         .send({ driving: true })
         .end(() => {
           //
-          Driver.findOne({ email }).then(driver => {
+          Drivers.findOne({ email }).then(driver => {
             //
             asssert(driver.driving === true);
             done();
           });
         });
     });
-    // check for edit
-    done();
   });
 
-  it('DELETE to /api/driver removes a driver', done => {
-    //
-    const driver = new Driver({ email: 'test@driver.com' });
+  it.only('DELETE to /api/driver removes a driver', done => {
+    const driver = new Drivers({ email: 'test@driver.com' });
 
     driver.save().then(() => {
       request(app)
         .delete(`/api/drivers/${driver._id}`)
         .end(() => {
-          //
-          Driver.findOne({ email: 'test@driver.com' }).then(driver => {
+          Drivers.findOne({ email: 'test@driver.com' }).then(driver => {
+            console.log('here?', driver);
             assert(driver === null);
             done();
           });
         });
     });
-    done();
   });
 });
