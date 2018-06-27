@@ -1,4 +1,4 @@
-const asssert = require('assert');
+const assert = require('assert');
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../../app');
@@ -17,7 +17,7 @@ describe('Driver controller', () => {
         .end(res => {
           Driver.count().then(newCount => {
             //
-            asssert((count = 1 === newCount));
+            assert((count = 1 === newCount));
             done();
           });
         });
@@ -38,7 +38,7 @@ describe('Driver controller', () => {
           //
           Drivers.findOne({ email }).then(driver => {
             //
-            asssert(driver.driving === true);
+            assert(driver.driving === true);
             done();
           });
         });
