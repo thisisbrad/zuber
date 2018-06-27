@@ -23,4 +23,15 @@ describe('Drivers controller', () => {
         });
     });
   });
+
+  it('PUT to /api/drivers edits an existing driver', done => {
+    // create driver for test
+    const driver = new Drivers({ email: 'test@driver.com', driving: false });
+    // edit driver
+    driver.save().then(() => {
+      //
+    });
+    // check for edit
+    done();
+  });
 });
