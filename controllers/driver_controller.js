@@ -4,6 +4,7 @@ module.exports = {
   },
   create(req, res) {
     //
-    console.log('body', res.body);
+    console.log('body', req.body);
+    res.send({ hi: 'there' });
   }
 };
