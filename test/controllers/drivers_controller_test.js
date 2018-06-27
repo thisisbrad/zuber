@@ -36,7 +36,7 @@ describe('Driver controller', () => {
         .send({ driving: true })
         .end(() => {
           //
-          Drivers.findOne({ email }).then(driver => {
+          Driver.findOne({ email }).then(driver => {
             //
             assert(driver.driving === true);
             done();
@@ -45,7 +45,7 @@ describe('Driver controller', () => {
     });
   });
 
-  it.only('DELETE to /api/driver removes a driver', done => {
+  it('DELETE to /api/driver removes a driver', done => {
     const driver = new Driver({ email: 'test@driver.com' });
 
     driver.save().then(() => {
@@ -53,7 +53,6 @@ describe('Driver controller', () => {
         .delete(`/api/drivers/${driver._id}`)
         .end(() => {
           Driver.findOne({ email: 'test@driver.com' }).then(driver => {
-            console.log('here?', driver);
             assert(driver === null);
             done();
           });
