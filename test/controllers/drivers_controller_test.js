@@ -80,7 +80,7 @@ describe('Driver controller', () => {
 
     Promise.all(newDrivers).then(() => {
       request(app)
-        .get('/api/drivers?lng=-80&lat=25')
+        .get('/api')
         .end((err, response) => {
           //
           console.log(response);
