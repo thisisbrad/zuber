@@ -6,13 +6,10 @@ module.exports = {
   },
   index(req, res, next) {
     const { lng, lat } = req.query;
-    // console.log('IN HERE', lng, lat);
+
     Driver.geoNear(
       { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
-      {
-        spherical: true,
-        maxDistance: 200000
-      }
+      { spherical: true, maxDistance: 200000 }
     )
       .then(drivers => res.send(drivers))
       .catch(next);
