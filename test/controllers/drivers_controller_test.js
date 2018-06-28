@@ -59,4 +59,33 @@ describe('Driver controller', () => {
         });
     });
   });
+
+  it('GET to /api/drivers?lng=555&lat=555 finds drivers close to location', done => {
+    //
+    const seattleDriver = new Driver({
+      email: 'seattle@driver.com',
+      geometry: {
+        type: 'Point',
+        coordinates: [-122.4759902, 47.6147628]
+      }
+    });
+    const miamiDriver = new Driver({
+      email: 'miami@driver.com',
+      geometry: {
+        type: 'Point',
+        coordinates: [-80.253, 25.791]
+      }
+    });
+    const newDrivers = [seattleDriver.save(), miamiDriver.save()];
+
+    Promise.all(newDrivers).then(() => {
+      request(app)
+        .get('/api/drivers?lng=-80&lat=25')
+        .end((err, response) => {
+          //
+          console.log(response);
+          done();
+        });
+    });
+  });
 });

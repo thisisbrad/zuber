@@ -4,6 +4,19 @@ module.exports = {
   greeting(req, res) {
     res.send({ howdy: 'partner' });
   },
+  index(req, res, next) {
+    console.log('IN HERE');
+    const { lng, lat } = req.query;
+    Driver.geoNear(
+      { type: 'Point', coordinates: [lng, lat] },
+      {
+        spherical: true,
+        maxDistance: 200000
+      }
+    )
+      .then(drivers => res.send(drivers))
+      .catch(next);
+  },
   create(req, res, next) {
     // console.log('body', req.body);
     const driverProps = req.body;
