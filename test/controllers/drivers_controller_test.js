@@ -8,18 +8,17 @@ const Driver = mongoose.model('driver');
 describe('Driver controller', () => {
   // method > route > result
   it('POST to /api/drivers creates a new driver', async () => {
-    // get count of driver
+    // get count of drivers
     const count = await Driver.count();
 
-    // send POST request with email
+    // send POST request with email for new driver
     await request(app)
       .post('/api/drivers')
       .send({ email: 'test@driver.com' });
 
-    const newCount = await Driver.count()
-      // get count after saving email
-      assert((count + 1 === newCount));
-
+    // get count after saving new driver
+    const newCount = await Driver.count();
+    assert(count + 1 === newCount);
   });
 
   it('PUT to /api/drivers edits an existing driver', done => {
