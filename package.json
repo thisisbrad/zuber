@@ -15,5 +15,8 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.1.6",
     "supertest": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }
