@@ -19,7 +19,7 @@ describe("Driver controller", () => {
 
     // get count after saving new driver
     const newCount = await Driver.count();
-    assert(count + 1 === newCount);
+    assert(count + 2 === newCount);
   });
 
   it("PUT to /api/drivers edits an existing driver", done => {
