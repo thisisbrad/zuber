@@ -8,15 +8,15 @@ const Driver = mongoose.model('driver');
 describe('Driver controller', () => {
   // method > route > result
   it('POST to /api/drivers creates a new driver', done => {
-    // get count of driverd
+    // get count of driver
     Driver.count().then(count => {
-      //
+      // send POST request with email
       request(app)
         .post('/api/drivers')
         .send({ email: 'test@driver.com' })
         .end(res => {
           Driver.count().then(newCount => {
-            //
+            // get count after saving email
             assert((count = 1 === newCount));
             done();
           });
@@ -35,7 +35,7 @@ describe('Driver controller', () => {
         .put(`/api/drivers/${driver._id}`)
         .send({ driving: true })
         .end(() => {
-          //
+          // update deriver status 
           Driver.findOne({ email }).then(driver => {
             //
             assert(driver.driving === true);
@@ -74,6 +74,8 @@ describe('Driver controller', () => {
       request(app)
         .get('/api/drivers?lng=-80&lat=25')
         .end((err, response) => {
+          console.log('REQ:',response.error);
+          console.log('body:',response.body);
           assert(response.body.length === 1);
           assert(response.body[0].obj.email === 'miami@test.com');
           done();
