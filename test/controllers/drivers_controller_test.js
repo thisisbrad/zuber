@@ -7,21 +7,19 @@ const Driver = mongoose.model('driver');
 
 describe('Driver controller', () => {
   // method > route > result
-  it('POST to /api/drivers creates a new driver', done => {
+  it('POST to /api/drivers creates a new driver', async () => {
     // get count of driver
-    Driver.count().then(count => {
-      // send POST request with email
-      request(app)
-        .post('/api/drivers')
-        .send({ email: 'test@driver.com' })
-        .end(res => {
-          Driver.count().then(newCount => {
-            // get count after saving email
-            assert((count = 1 === newCount));
-            done();
-          });
-        });
-    });
+    const count = await Driver.count();
+
+    // send POST request with email
+    await request(app)
+      .post('/api/drivers')
+      .send({ email: 'test@driver.com' });
+
+    const newCount = await Driver.count()
+      // get count after saving email
+      assert((count + 1 === newCount));
+
   });
 
   it('PUT to /api/drivers edits an existing driver', done => {
@@ -35,7 +33,7 @@ describe('Driver controller', () => {
         .put(`/api/drivers/${driver._id}`)
         .send({ driving: true })
         .end(() => {
-          // update deriver status 
+          // update deriver status
           Driver.findOne({ email }).then(driver => {
             //
             assert(driver.driving === true);
