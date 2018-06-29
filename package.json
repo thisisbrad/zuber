@@ -14,9 +14,7 @@
     "express": "^4.16.3",
     "mocha": "^5.2.0",
     "mongoose": "^5.1.6",
-    "supertest": "^3.1.0"
-  },
-  "devDependencies": {
+    "supertest": "^3.1.0",
     "nodemon": "^1.17.5"
   }
 }
