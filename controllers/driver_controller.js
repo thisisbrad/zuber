@@ -10,7 +10,7 @@ module.exports = {
       type: 'Point',
       coordinates: [parseFloat(lng), parseFloat(lat)],
     };
-    console.log('in ctrl', point)
+    
     Driver.aggregate([
         {
             $geoNear: { 
@@ -21,13 +21,9 @@ module.exports = {
             }
         }])
         .then((drivers) => {
-          console.log('DRIVERS', drivers)
             res.send(drivers);
         })
-        .catch((error, next)=>{
-          console.log('in ctrl', error)
-          next()
-        });
+        .catch(next);
   },
   create(req, res, next) {
     // console.log('body', req.body);
