@@ -9,6 +9,7 @@ describe("Driver controller", () => {
   // method > route > result
   it("POST to /api/drivers creates a new driver", async () => {
     // get count of drivers
+    // add this
     const count = await Driver.count();
 
     // send POST request with email for new driver
